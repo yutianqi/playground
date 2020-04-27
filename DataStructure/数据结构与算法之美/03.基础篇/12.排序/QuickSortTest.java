@@ -1,64 +1,19 @@
 /**
- * 功能描述
+ * Quick Sort Test
  *
  * @author y00290641
- * @version V300R005C10, 2020/3/27
- * @since V300R005C10
  */
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.*;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.io.File;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Arrays;
-import java.time.LocalDateTime;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.concurrent.ConcurrentHashMap;
-
 public class QuickSortTest {
-    
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         int[] array = {7, 8, 3, 1, 6, 9};
         quickSort(array);
         println(array);
     }
-    
-    
+       
     public static void quickSort(int[] array) {
         subQuickSort(array, 0, array.length -1);
     }
 
-    /**
-     * 
-     */
     public static void subQuickSort(int[] array, int beginIndex, int endIndex) {
         // 快排递归的终止条件是排序区间的beginIndex大于等于endIndex
         if (beginIndex >= endIndex) {
@@ -71,12 +26,9 @@ public class QuickSortTest {
         subQuickSort(array, pivotIndex+1, endIndex);        
     }
     
-    /**
-     * 
-     */
     public static int partion(int[] array, int beginIndex, int endIndex) {
         System.out.println("before:");
-        println2(array, beginIndex, endIndex);
+        println(array, beginIndex, endIndex);
         // 默认选择排序区间的最后一个元素为pivot
         int pivot = array[endIndex];
         // 设置左区间起始值为第一个值
@@ -96,7 +48,7 @@ public class QuickSortTest {
         
         System.out.println("privot:" + pivot + " index:" + i);
         System.out.println("after:");
-        println2(array, beginIndex, endIndex);
+        println(array, beginIndex, endIndex);
         return i;
     }
     
@@ -107,7 +59,7 @@ public class QuickSortTest {
         }
     } 
 
-    public static void println2(int[] a, int beginIndex, int endIndex) {
+    public static void println(int[] a, int beginIndex, int endIndex) {
         for (int i = beginIndex; i <=endIndex; i++) {
             System.out.print(a[i]);            
             System.out.print(" ");
