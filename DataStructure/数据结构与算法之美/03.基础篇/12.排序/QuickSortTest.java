@@ -31,10 +31,11 @@ public class QuickSortTest {
         println(array, beginIndex, endIndex);
         // 默认选择排序区间的最后一个元素为pivot
         int pivot = array[endIndex];
-        // 设置左区间起始值为第一个值
+        // 设置左区间起始值为第一个值，即默认左区间为空
         int i = beginIndex;
         // 从排序区间第一个数据开始，直到倒数第二个数据，进行分区
         for (int j = beginIndex; j <= endIndex-1; j++) {
+            // 当找到小于pivot的元素，通过交换的方式，将其放到左区间，也就是array[i]的位置
             if (array[j]<pivot) {
                 int tmp1 = array[i];
                 array[i] = array[j];
