@@ -1,8 +1,12 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2019-2019. All rights reserved.
+ *
+ * 可信考试中使用这种解法超时
  */
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 class Solution {
     private int GLOBAL_INDEX = 0;
@@ -13,7 +17,7 @@ class Solution {
      * @param word 输入字符串
      * @return 分组信息
      */
-    public int[] getGroups(String word) {
+    public List<Integer> partitionLabels(String word) {
         Set<String> set = new HashSet<>();
         String[] list = new String[word.length() + 2];
 
@@ -28,9 +32,9 @@ class Solution {
                 GLOBAL_INDEX += 1;
             }
         }
-        int[] ret = new int[GLOBAL_INDEX];
+        List<Integer> ret = new ArrayList<>();
         for (int index = 0; index < GLOBAL_INDEX; index++) {
-            ret[index] = list[index].length();
+            ret.add(list[index].length());
         }
         return ret;
     }
