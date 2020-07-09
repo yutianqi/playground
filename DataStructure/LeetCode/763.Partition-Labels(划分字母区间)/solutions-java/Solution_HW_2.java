@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 功能描述
@@ -13,7 +11,7 @@ import java.util.Set;
  * @since V300R005C10
  */
 public class Solution {
-    Map<String, Integer> map = new HashMap<>();
+    private Map<String, Integer> map = new HashMap<>();
 
     /**
      * 获取分组信息
@@ -22,9 +20,7 @@ public class Solution {
      * @return 分组信息
      */
     public int[] getGroups(String word) {
-
         List<Integer> aList = new ArrayList<>();
-
         for (int index = 0; index < word.length(); index++) {
             String myChar = String.valueOf(word.charAt(index));
             if (!map.keySet().contains(myChar)) {
@@ -36,13 +32,13 @@ public class Solution {
         }
 
         List<Integer> ret = new ArrayList<>();
-        int index = aList.size()-1;
-        while (index >=0) {
+        int index = aList.size() - 1;
+        while (index >= 0) {
             if (aList.get(index) == index) {
                 ret.add(0, 1);
-                index++;
+                index--;
             } else {
-                int range = find(aList,aList.get(index), index);
+                int range = find(aList, aList.get(index), index);
                 ret.add(0, range);
                 index = index - range;
             }
@@ -55,20 +51,16 @@ public class Solution {
         return array;
     }
 
+
     private int find(List<Integer> aList, int begin, int end) {
         int index = end;
-        while(index >= begin) {
-            if (aList.get(index) == index) {
-                continue;
-            } else {
+        while (index >= begin) {
+            if (aList.get(index) != index && aList.get(index) < begin) {
                 begin = aList.get(index);
             }
-            index -=1;
+            index -= 1;
         }
-        int range = end - index;
-        return range;
-
-
+        return end - index;
     }
 
 

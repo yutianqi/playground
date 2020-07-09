@@ -1,9 +1,12 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2019-2019. All rights reserved.
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 通过	11 ms	39.7 MB	Java
  */
-
-
-class Solution {
+public class Solution {
     private Map<String, Integer> map = new HashMap<>();
 
     /**
@@ -25,13 +28,13 @@ class Solution {
         }
 
         List<Integer> ret = new ArrayList<>();
-        int index = aList.size()-1;
-        while (index >=0) {
+        int index = aList.size() - 1;
+        while (index >= 0) {
             if (aList.get(index) == index) {
                 ret.add(0, 1);
                 index--;
             } else {
-                int range = find(aList,aList.get(index), index);
+                int range = find(aList, aList.get(index), index);
                 ret.add(0, range);
                 index = index - range;
             }
@@ -44,18 +47,15 @@ class Solution {
         return array;
     }
 
+
     private int find(List<Integer> aList, int begin, int end) {
         int index = end;
-        while(index >= begin) {
-            if (aList.get(index) != index) {
+        while (index >= begin) {
+            if (aList.get(index) != index && aList.get(index) < begin) {
                 begin = aList.get(index);
             }
-            index -=1;
+            index -= 1;
         }
-        int range = end - index;
-        return range;
+        return end - index;
     }
-    
-    
-    
 }
