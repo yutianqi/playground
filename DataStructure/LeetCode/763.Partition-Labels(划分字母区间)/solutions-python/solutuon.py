@@ -5,6 +5,11 @@ class Solution(object):
         :rtype: List[int]
         """
         table = {c: i for i, c in enumerate(S)}
+        
+        
+        print(table)
+        
+        
         start = 0
         maxIdx = 0
         res = []

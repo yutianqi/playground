@@ -1,15 +1,13 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2019-2019. All rights reserved.
- *
- * 可信考试中使用这种解法超时
- */
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-class Solution {
-    private int GLOBAL_INDEX = 0;
+/**
+ * 通过	11 ms	39.7 MB	Java
+ */
+public class Solution {
+    private Map<String, Integer> map = new HashMap<>();
 
     /**
      * 获取分组信息
@@ -17,49 +15,47 @@ class Solution {
      * @param word 输入字符串
      * @return 分组信息
      */
-    public List<Integer> partitionLabels(String word) {
-        Set<String> set = new HashSet<>();
-        String[] list = new String[word.length() + 2];
-
+    public int[] getGroups(String word) {
+        List<Integer> aList = new ArrayList<>();
         for (int index = 0; index < word.length(); index++) {
             String myChar = String.valueOf(word.charAt(index));
-            if (!set.contains(myChar)) {
-                set.add(myChar);
-                list[GLOBAL_INDEX] = myChar;
-                GLOBAL_INDEX += 1;
+            if (!map.keySet().contains(myChar)) {
+                map.put(myChar, index);
+                aList.add(index);
             } else {
-                addItemToList(list, myChar);
-                GLOBAL_INDEX += 1;
+                aList.add(map.get(myChar));
             }
         }
+
         List<Integer> ret = new ArrayList<>();
-        for (int index = 0; index < GLOBAL_INDEX; index++) {
-            ret.add(list[index].length());
-        }
-        return ret;
-    }
-
-    private void addItemToList(String[] list, String c) {
-        for (int index = 0; list[index] != null; index++) {
-            String old = list[index];
-
-            if (!old.contains(c)) {
-                continue;
+        int index = aList.size() - 1;
+        while (index >= 0) {
+            if (aList.get(index) == index) {
+                ret.add(0, 1);
+                index--;
+            } else {
+                int range = find(aList, aList.get(index), index);
+                ret.add(0, range);
+                index = index - range;
             }
-            list[index] = getMergedStr(list, index, c);
         }
+
+        int[] array = new int[ret.size()];
+        for (int i = 0; i < ret.size(); i++) {
+            array[i] = ret.get(i);
+        }
+        return array;
     }
 
-    private String getMergedStr(String[] list, int index, String c) {
-        StringBuilder ret = new StringBuilder();
-        for (int i = index; list[i] != null; i++) {
-            GLOBAL_INDEX -= 1;
-            String old = list[i];
-            ret.append(old);
-            list[i] = null;
-        }
-        ret.append(c);
-        return ret.toString();
-    }
 
+    private int find(List<Integer> aList, int begin, int end) {
+        int index = end;
+        while (index >= begin) {
+            if (aList.get(index) != index && aList.get(index) < begin) {
+                begin = aList.get(index);
+            }
+            index -= 1;
+        }
+        return end - index;
+    }
 }
